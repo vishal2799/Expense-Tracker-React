@@ -7,7 +7,7 @@ const Sidebar = ({ sidebarClose }) => {
   return (
     <div className='w-full h-full flex flex-col py-5 px-6'>
       <Link to={'/'} onClick={sidebarClose}>
-        <img src={Logo} className='w-3/4 h-24' />
+        <img src={Logo} className='w-3/4 h-12' />
       </Link>
       {/* Sidebar Links */}
       <div className='flex-grow overflow-auto p-5'>
@@ -22,6 +22,7 @@ const Sidebar = ({ sidebarClose }) => {
           </Link>
         ))}
       </div>
+      <div>Profile</div>
     </div>
   );
 };
