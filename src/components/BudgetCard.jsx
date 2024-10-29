@@ -1,12 +1,10 @@
-import { ShoppingBag } from 'lucide-react';
-
 const BudgetCard = () => {
   return (
     <div className='flex flex-col shadow-sm p-5 pb-7 border border-gray-300 rounded-md'>
       <div className='flex justify-between items-baseline mb-4'>
         <div className='flex gap-2'>
-          <div className='flex flex-col justify-center items-center rounded-full bg-gray-300 p-3'>
-            <ShoppingBag width={24} height={24} className='text-red-500' />
+          <div className='flex flex-col justify-center items-center rounded-full bg-slate-200 h-10 w-10 text-lg'>
+            😊
           </div>
           <div className='flex flex-col'>
             <h4 className='text-base font-medium text-black'>Shopping</h4>
