@@ -10,7 +10,7 @@ const MainLayout = () => {
         <div
           className={`${
             isSidebarOpen ? 'translate-x-0 flex' : '-translate-x-full'
-          } md:translate-x-0 transition-transform absolute w-full md:static top-0 left-0 z-50 md:w-2/5 lg:w-1/5 md:max-w-xs h-full bg-[#00000073] backdrop-blur-[50px] border-r border-black md:bg-[#0003] md:border-[#ffffff1a] md:flex flex-col justify-center items-center overflow-auto`}
+          } md:translate-x-0 transition-transform absolute w-full md:static top-0 left-0 z-50 md:w-2/5 lg:w-1/5 md:max-w-xs h-full border-r border-black md:flex flex-col justify-center items-center overflow-auto`}
         >
           <Sidebar sidebarClose={() => setIsSidebarOpen(false)} />
         </div>

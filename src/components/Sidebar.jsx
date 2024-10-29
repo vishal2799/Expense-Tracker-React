@@ -1,28 +1,34 @@
 /* eslint-disable react/prop-types */
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Logo } from '../assets/images';
 import { navLinks } from '../constants';
 
 const Sidebar = ({ sidebarClose }) => {
+  const linkClass = ({ isActive }) =>
+    isActive
+      ? 'flex justify-start items-center p-4 gap-3 rounded-lg bg-blue-200 text-blue-700 text-base font-medium'
+      : 'flex justify-start items-center p-4 gap-3 rounded-lg text-gray-600 group hover:bg-blue-200 hover:text-blue-700 text-base font-medium';
+
   return (
     <div className='w-full h-full flex flex-col py-5 px-6'>
       <Link to={'/'} onClick={sidebarClose}>
         <img src={Logo} className='w-3/4 h-12' />
       </Link>
       {/* Sidebar Links */}
-      <div className='flex-grow overflow-auto p-5'>
+      <div className='flex-grow overflow-auto py-5 flex flex-col gap-1'>
         {navLinks.map((link, index) => (
-          <Link
+          <NavLink
             key={index}
             to={link.url}
             onClick={sidebarClose} // Close sidebar on link click
-            className='flex justify-start items-center py-[10px] px-[14px] gap-3 rounded-lg text-white hover:bg-white hover:bg-opacity-10 text-sm font-medium'
+            className={linkClass}
           >
+            <link.icon className='text-base' />
             {link.label}
-          </Link>
+          </NavLink>
         ))}
       </div>
-      <div>Profile</div>
+      <div className='text-black text-sm font-medium'>Profile</div>
     </div>
   );
 };

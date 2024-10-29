@@ -1,2 +1,3 @@
 import Sidebar from './Sidebar';
-export { Sidebar };
+import BudgetCard from './BudgetCard';
+export { Sidebar, BudgetCard };
