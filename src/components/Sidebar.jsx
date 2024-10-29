@@ -12,7 +12,7 @@ const Sidebar = ({ sidebarClose }) => {
   return (
     <div className='w-full h-full flex flex-col py-5 px-6'>
       <Link to={'/'} onClick={sidebarClose}>
-        <img src={Logo} className='w-3/4 h-12' />
+        <img src={Logo} className='w-52' />
       </Link>
       {/* Sidebar Links */}
       <div className='flex-grow overflow-auto py-5 flex flex-col gap-1'>

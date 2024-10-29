@@ -12,12 +12,12 @@ const MainLayout = () => {
           <div
             className={`${
               isSidebarOpen ? 'translate-x-0 flex' : '-translate-x-full'
-            } md:translate-x-0 transition-transform absolute w-full md:static top-0 left-0 z-50 md:w-2/5 lg:w-1/5 md:max-w-xs h-full border-r border-black md:flex flex-col justify-center items-center overflow-auto`}
+            } md:translate-x-0 transition-transform absolute w-full md:static top-0 left-0 z-50 md:w-2/5 lg:w-1/5 md:max-w-xs h-full border-r border-gray-300 bg-white md:flex flex-col justify-center items-center overflow-auto`}
           >
             <Sidebar sidebarClose={() => setIsSidebarOpen(false)} />
           </div>
 
-          <div className='fixed md:hidden top-[52px] right-11 z-[101] h-10 w-10 p-[10px] rounded-xl border border-[#ffffff0d] backdrop-blur-2xl'>
+          <div className='fixed md:hidden top-6 right-6 z-[101] h-10 w-10 p-[10px] rounded-xl border border-gray-300 backdrop-blur-2xl items-center justify-center flex'>
             <div onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
               {isSidebarOpen ? 'X' : '|||'}
             </div>
