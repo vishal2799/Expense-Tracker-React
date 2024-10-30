@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Modal, Sidebar } from '../components';
 import { ModalProvider } from '../context/ModalContext';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
@@ -28,6 +29,7 @@ const MainLayout = () => {
         </div>
       </main>
       <Modal />
+      <ToastContainer />
     </ModalProvider>
   );
 };

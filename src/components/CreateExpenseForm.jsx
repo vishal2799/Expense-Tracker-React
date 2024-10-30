@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const CreateExpenseForm = ({ onAddExpense }) => {
   const [formData, setFormData] = useState({ expenseName: '', amount: '' });
@@ -11,9 +12,16 @@ const CreateExpenseForm = ({ onAddExpense }) => {
     console.log('Updated FormData:', { ...formData, [name]: value }); // Log state on each change
   };
 
+  const notify = () =>
+    toast.success('Expense Added', {
+      pauseOnHover: false,
+      autoClose: 2000,
+    });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddExpense(formData);
+    notify();
     setFormData({ expenseName: '', amount: '' });
   };
 
