@@ -1,6 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useModal } from '../context/ModalContext';
 
-const DeleteExpense = () => {
+const DeleteExpense = ({ onDeleteExpense }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onDeleteExpense();
+  };
   const { closeModal } = useModal();
   return (
     <div>
@@ -16,7 +21,10 @@ const DeleteExpense = () => {
         >
           Close
         </button>
-        <button className='rounded-md bg-blue-500 text-white py-2 px-4 border-blue-400'>
+        <button
+          onClick={handleSubmit}
+          className='rounded-md bg-blue-500 text-white py-2 px-4 border-blue-400'
+        >
           Continue
         </button>
       </div>

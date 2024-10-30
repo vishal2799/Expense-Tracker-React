@@ -10,10 +10,13 @@ const Expenses = () => {
   const [budget, setBudget] = useState(null);
   const [expenses, setExpenses] = useState([]);
 
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
 
-  const openCreateBudgetModal = () => {
-    openModal(<DeleteExpense />, 'Delete Expense');
+  const openDeleteExpenseModal = (expenseId) => {
+    openModal(
+      <DeleteExpense onDeleteExpense={() => deleteExpense(expenseId)} />,
+      'Delete Expense'
+    );
   };
 
   useEffect(() => {
@@ -47,6 +50,7 @@ const Expenses = () => {
       (expense) => expense.id !== expenseId
     );
     setExpenses(updatedExpenses);
+    closeModal();
   };
 
   const handleAddExpense = (newExpenseData) => {
@@ -104,7 +108,7 @@ const Expenses = () => {
                 <h2> {expense.date}</h2>
                 <h2>
                   <Trash
-                    onClick={openCreateBudgetModal}
+                    onClick={() => openDeleteExpenseModal(expense.id)}
                     width={24}
                     height={24}
                     className='text-red-500'
