@@ -1,19 +1,24 @@
+/* eslint-disable react/prop-types */
 import EmojiPicker from 'emoji-picker-react';
 import { useState } from 'react';
 
-const CreateBudgetForm = () => {
+const CreateBudgetForm = ({ onAddBudget }) => {
   const [emojiIcon, setEmojiIcon] = useState('😊');
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
-  const [budgetName, setBudgetName] = useState('');
-  const [amount, setAmount] = useState('');
+
+  const [formData, setFormData] = useState({ budgetName: '', amount: '' });
+
+  // Update formData state on input change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    console.log('Updated FormData:', { ...formData, [name]: value }); // Log state on each change
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Pass the form data up to the parent component
-    //onSubmit({ budgetName, amount });
-    console.log(emojiIcon, budgetName, amount);
-    setBudgetName(''); // Clear the form fields after submit
-    setAmount('');
+    onAddBudget(formData, emojiIcon);
+    setFormData({ budgetName: '', amount: '' });
   };
   return (
     <div>
@@ -39,8 +44,9 @@ const CreateBudgetForm = () => {
           Budget Name
           <input
             type='text'
-            value={budgetName}
-            onChange={(e) => setBudgetName(e.target.value)}
+            name='budgetName'
+            value={formData.budgetName}
+            onChange={handleInputChange}
             className='border border-gray-200 bg-transparent p-2 rounded-md mt-1 w-full'
             placeholder='Enter budget name'
           />
@@ -49,15 +55,16 @@ const CreateBudgetForm = () => {
           Amount
           <input
             type='number'
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            name='amount'
+            value={formData.amount}
+            onChange={handleInputChange}
             className='border border-gray-200 bg-transparent p-2 rounded-md mt-1 w-full'
             placeholder='Enter amount'
           />
         </label>
         <button
           type='submit'
-          disabled={!(budgetName, amount)}
+          disabled={!(formData.budgetName, formData.amount)}
           className='mt-4 bg-blue-500 w-full text-white py-2 px-4 rounded-md disabled:bg-blue-300'
         >
           Create Budget

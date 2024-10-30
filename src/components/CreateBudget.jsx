@@ -3,11 +3,14 @@ import { Plus } from 'lucide-react';
 import CreateBudgetForm from './CreateBudgetForm';
 import { useModal } from '../context/ModalContext';
 
-const CreateBudget = () => {
+const CreateBudget = ({ onAddBudget }) => {
   const { openModal } = useModal();
 
   const openCreateBudgetModal = () => {
-    openModal(<CreateBudgetForm />, 'Create New Budget');
+    openModal(
+      <CreateBudgetForm onAddBudget={onAddBudget} />,
+      'Create New Budget'
+    );
   };
   return (
     <>

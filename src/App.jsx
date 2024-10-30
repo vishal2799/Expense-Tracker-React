@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { MainLayout } from './layouts';
-import { Budget, ErrorPage, Expenses, Home } from './pages';
+import { AllExpenses, Budget, ErrorPage, Expenses, Home } from './pages';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: '/expenses/:budgetId',
         element: <Expenses />,
+      },
+      {
+        path: '/expenses',
+        element: <AllExpenses />,
       },
     ],
   },

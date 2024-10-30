@@ -1,8 +1,13 @@
+import { Link } from 'react-router-dom';
+
 /* eslint-disable react/prop-types */
 const BudgetCard = ({ budget, itemCount, spentAmount, remainingAmount }) => {
   const progress = (spentAmount / budget.totalAmount) * 100;
   return (
-    <div className='flex flex-col shadow-sm p-6 pb-8 border border-gray-300 rounded-md'>
+    <Link
+      to={`/expenses/${budget.id}`}
+      className='flex flex-col shadow-sm p-6 pb-8 border border-gray-300 rounded-md'
+    >
       <div className='flex justify-between items-baseline mb-4'>
         <div className='flex gap-2'>
           <div className='flex flex-col justify-center items-center rounded-full bg-slate-200 h-10 w-10 text-lg'>
@@ -35,7 +40,7 @@ const BudgetCard = ({ budget, itemCount, spentAmount, remainingAmount }) => {
           style={{ width: `${progress}%` }}
         ></div>
       </div>
-    </div>
+    </Link>
   );
 };
 

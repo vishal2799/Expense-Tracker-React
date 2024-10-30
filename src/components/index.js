@@ -4,6 +4,7 @@ import Modal from './Modal';
 import CreateBudget from './CreateBudget';
 import CreateBudgetForm from './CreateBudgetForm';
 import CreateExpenseForm from './CreateExpenseForm';
+import DeleteExpense from './DeleteExpense';
 export {
   Sidebar,
   BudgetCard,
@@ -11,4 +12,5 @@ export {
   CreateBudget,
   CreateBudgetForm,
   CreateExpenseForm,
+  DeleteExpense,
 };

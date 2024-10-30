@@ -1,13 +1,20 @@
 import { Trash } from 'lucide-react';
-import { BudgetCard, CreateExpenseForm } from '../components';
+import { BudgetCard, CreateExpenseForm, DeleteExpense } from '../components';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { budgetData, expensesData } from '../constants';
+import { useModal } from '../context/ModalContext';
 
 const Expenses = () => {
   const { budgetId } = useParams();
   const [budget, setBudget] = useState(null);
   const [expenses, setExpenses] = useState([]);
+
+  const { openModal } = useModal();
+
+  const openCreateBudgetModal = () => {
+    openModal(<DeleteExpense />, 'Delete Expense');
+  };
 
   useEffect(() => {
     // Find the specific budget based on budgetId
@@ -22,7 +29,9 @@ const Expenses = () => {
 
     // Set both the budget and the expenses in state
     setBudget(selectedBudget);
-    setExpenses(relatedExpenses);
+    if (relatedExpenses.length > 0) {
+      setExpenses(relatedExpenses);
+    }
   }, [budgetId]);
 
   const totalSpent = expenses.reduce(
@@ -73,32 +82,40 @@ const Expenses = () => {
 
           {/* Flex container for CreateExpenseForm with border styling */}
           <div className='flex flex-col border border-gray-300 rounded-md shadow-sm p-6'>
-            <CreateExpenseForm onAddExpense={handleAddExpense} />
+            {remainingAmount === 0 ? (
+              'No Remaining Amount'
+            ) : (
+              <CreateExpenseForm onAddExpense={handleAddExpense} />
+            )}
           </div>
         </div>
-        <div className='text-black'>
-          <div className='grid grid-cols-4 bg-slate-200 p-2'>
-            <h2 className='font-bold'>Name</h2>
-            <h2 className='font-bold'>Amount</h2>
-            <h2 className='font-bold'>Date</h2>
-            <h2 className='font-bold'>Action</h2>
-          </div>
-          {expenses.map((expense, index) => (
-            <div key={index} className='grid grid-cols-4 bg-slate-50 p-2'>
-              <h2>{expense.expenseName}</h2>
-              <h2>${expense.amount}</h2>
-              <h2> {expense.date}</h2>
-              <h2>
-                <Trash
-                  onClick={() => deleteExpense(expense.id)}
-                  width={24}
-                  height={24}
-                  className='text-red-500'
-                />
-              </h2>
+        {expenses.length > 0 ? (
+          <div className='text-black'>
+            <div className='grid grid-cols-4 bg-slate-200 p-2'>
+              <h2 className='font-bold'>Name</h2>
+              <h2 className='font-bold'>Amount</h2>
+              <h2 className='font-bold'>Date</h2>
+              <h2 className='font-bold'>Action</h2>
             </div>
-          ))}
-        </div>
+            {expenses.map((expense, index) => (
+              <div key={index} className='grid grid-cols-4 bg-slate-50 p-2'>
+                <h2>{expense.expenseName}</h2>
+                <h2>${expense.amount}</h2>
+                <h2> {expense.date}</h2>
+                <h2>
+                  <Trash
+                    onClick={openCreateBudgetModal}
+                    width={24}
+                    height={24}
+                    className='text-red-500'
+                  />
+                </h2>
+              </div>
+            ))}
+          </div>
+        ) : (
+          'No Expenses'
+        )}
       </div>
     </div>
   );
