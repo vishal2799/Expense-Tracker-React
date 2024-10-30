@@ -1,17 +1,22 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 
-const CreateExpenseForm = () => {
-  const [expenseName, setExpenseName] = useState('');
-  const [amount, setAmount] = useState('');
+const CreateExpenseForm = ({ onAddExpense }) => {
+  const [formData, setFormData] = useState({ expenseName: '', amount: '' });
+
+  // Update formData state on input change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    console.log('Updated FormData:', { ...formData, [name]: value }); // Log state on each change
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Pass the form data up to the parent component
-    //onSubmit({ budgetName, amount });
-    console.log(expenseName, amount);
-    setExpenseName(''); // Clear the form fields after submit
-    setAmount('');
+    onAddExpense(formData);
+    setFormData({ expenseName: '', amount: '' });
   };
+
   return (
     <div>
       <h4 className='text-lg text-black font-semibold mb-2'>Add New Expense</h4>
@@ -20,8 +25,9 @@ const CreateExpenseForm = () => {
           Expense Name
           <input
             type='text'
-            value={expenseName}
-            onChange={(e) => setExpenseName(e.target.value)}
+            name='expenseName'
+            value={formData.expenseName}
+            onChange={handleInputChange}
             className='border border-gray-200 bg-transparent p-2 rounded-md mt-1 w-full'
             placeholder='Enter Expense name'
           />
@@ -30,15 +36,16 @@ const CreateExpenseForm = () => {
           Expense Amount
           <input
             type='number'
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            name='amount'
+            value={formData.amount}
+            onChange={handleInputChange}
             className='border border-gray-200 bg-transparent p-2 rounded-md mt-1 w-full'
             placeholder='Enter Expense amount'
           />
         </label>
         <button
           type='submit'
-          disabled={!(expenseName, amount)}
+          disabled={!(formData.expenseName, formData.amount)}
           className='mt-4 bg-blue-500 w-full text-white py-2 px-4 rounded-md disabled:bg-blue-300'
         >
           Add New Expense

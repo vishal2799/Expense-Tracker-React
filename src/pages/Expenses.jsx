@@ -40,6 +40,18 @@ const Expenses = () => {
     setExpenses(updatedExpenses);
   };
 
+  const handleAddExpense = (newExpenseData) => {
+    const newExpense = {
+      ...newExpenseData,
+      id: expenses.length + 1 + Math.random(), // Unique ID
+      budgetId: Number(budgetId),
+      amount: parseFloat(newExpenseData.amount),
+      date: new Date().toISOString().split('T')[0], // Default to today's date
+    };
+
+    setExpenses([...expenses, newExpense]);
+  };
+
   if (!budget) {
     return <p>Loading...</p>; // Display a loading state while data is being set
   }
@@ -61,7 +73,7 @@ const Expenses = () => {
 
           {/* Flex container for CreateExpenseForm with border styling */}
           <div className='flex flex-col border border-gray-300 rounded-md shadow-sm p-6'>
-            <CreateExpenseForm />
+            <CreateExpenseForm onAddExpense={handleAddExpense} />
           </div>
         </div>
         <div className='text-black'>
