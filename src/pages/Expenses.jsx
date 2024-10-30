@@ -73,7 +73,7 @@ const Expenses = () => {
     <div className='p-5 flex flex-col gap-6'>
       <h2 className='text-3xl font-semibold text-black'>My Expenses</h2>
       <div className='flex flex-col gap-8'>
-        <div className='grid grid-cols-2 gap-5'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
           {/* Flex container for BudgetCard */}
           <div className='flex flex-col'>
             <BudgetCard
@@ -94,7 +94,7 @@ const Expenses = () => {
           </div>
         </div>
         {expenses.length > 0 ? (
-          <div className='text-black'>
+          <div className='text-black overflow-auto'>
             <div className='grid grid-cols-4 bg-slate-200 p-2'>
               <h2 className='font-bold'>Name</h2>
               <h2 className='font-bold'>Amount</h2>
