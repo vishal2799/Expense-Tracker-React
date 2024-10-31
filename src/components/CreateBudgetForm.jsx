@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import EmojiPicker from 'emoji-picker-react';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const CreateBudgetForm = ({ onAddBudget }) => {
   const [emojiIcon, setEmojiIcon] = useState('😊');
@@ -15,9 +16,16 @@ const CreateBudgetForm = ({ onAddBudget }) => {
     console.log('Updated FormData:', { ...formData, [name]: value }); // Log state on each change
   };
 
+  const notify = () =>
+    toast.success('Budget Added', {
+      pauseOnHover: false,
+      autoClose: 2000,
+    });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddBudget(formData, emojiIcon);
+    notify();
     setFormData({ budgetName: '', amount: '' });
   };
   return (

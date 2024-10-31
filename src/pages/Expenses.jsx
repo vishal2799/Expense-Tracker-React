@@ -1,11 +1,17 @@
-import { Trash } from 'lucide-react';
-import { BudgetCard, CreateExpenseForm, DeleteExpense } from '../components';
-import { useParams } from 'react-router-dom';
+import { Pencil, Trash } from 'lucide-react';
+import {
+  BudgetCard,
+  CreateExpenseForm,
+  DeleteBudget,
+  DeleteExpense,
+} from '../components';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { budgetData, expensesData } from '../constants';
 import { useModal } from '../context/ModalContext';
 
 const Expenses = () => {
+  const navigate = useNavigate();
   const { budgetId } = useParams();
   const [budget, setBudget] = useState(null);
   const [expenses, setExpenses] = useState([]);
@@ -16,6 +22,13 @@ const Expenses = () => {
     openModal(
       <DeleteExpense onDeleteExpense={() => deleteExpense(expenseId)} />,
       'Delete Expense'
+    );
+  };
+
+  const openDeleteBudgetModal = (budgetId) => {
+    openModal(
+      <DeleteBudget onDeleteBudget={() => deleteBudget(budgetId)} />,
+      'Delete Budget'
     );
   };
 
@@ -53,6 +66,14 @@ const Expenses = () => {
     closeModal();
   };
 
+  const deleteBudget = (budgetId) => {
+    console.log(budgetId);
+    closeModal();
+    setTimeout(() => {
+      navigate('/budgets');
+    }, 2500);
+  };
+
   const handleAddExpense = (newExpenseData) => {
     const newExpense = {
       ...newExpenseData,
@@ -71,7 +92,22 @@ const Expenses = () => {
 
   return (
     <div className='p-5 flex flex-col gap-6'>
-      <h2 className='text-3xl font-semibold text-black'>My Expenses</h2>
+      <div className='flex justify-between items-center'>
+        <h2 className='text-3xl font-semibold text-black'>My Expenses</h2>
+        <div className='flex gap-3'>
+          <button className='flex gap-2 py-2 px-5 bg-blue-500 text-white rounded-md'>
+            <Pencil width={16} />
+            Edit
+          </button>
+          <button
+            onClick={() => openDeleteBudgetModal(budget.id)}
+            className='flex gap-2 py-2 px-5 bg-red-500 text-white rounded-md'
+          >
+            <Trash width={16} />
+            Delete
+          </button>
+        </div>
+      </div>
       <div className='flex flex-col gap-8'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
           {/* Flex container for BudgetCard */}
