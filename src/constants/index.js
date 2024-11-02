@@ -130,3 +130,54 @@ export const expensesData = [
     date: '2024-10-04',
   },
 ];
+
+export const budgetData2 = [
+  {
+    id: 1,
+    category: 'Shopping',
+    emoji: '🛍️',
+    itemCount: 5,
+    totalAmount: 2000,
+    totalSpent: 1500, // Example value
+  },
+  {
+    id: 2,
+    category: 'Groceries',
+    emoji: '🍎',
+    itemCount: 10,
+    totalAmount: 500,
+    totalSpent: 400, // Example value
+  },
+  {
+    id: 3,
+    category: 'Rent',
+    emoji: '🏠',
+    itemCount: 1,
+    totalAmount: 1000,
+    totalSpent: 1000, // Example value
+  },
+  {
+    id: 4,
+    category: 'Dining Out',
+    emoji: '🍽️',
+    itemCount: 3,
+    totalAmount: 300,
+    totalSpent: 250, // Example value
+  },
+  {
+    id: 5,
+    category: 'Entertainment',
+    emoji: '🎬',
+    itemCount: 4,
+    totalAmount: 600,
+    totalSpent: 500, // Example value
+  },
+  {
+    id: 6,
+    category: 'Utilities',
+    emoji: '💡',
+    itemCount: 2,
+    totalAmount: 300,
+    totalSpent: 250, // Example value
+  },
+];

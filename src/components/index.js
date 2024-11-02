@@ -6,6 +6,7 @@ import CreateBudgetForm from './CreateBudgetForm';
 import CreateExpenseForm from './CreateExpenseForm';
 import DeleteExpense from './DeleteExpense';
 import DeleteBudget from './DeleteBudget';
+import ExpensesList from './ExpensesList';
 export {
   Sidebar,
   BudgetCard,
@@ -15,4 +16,5 @@ export {
   CreateExpenseForm,
   DeleteExpense,
   DeleteBudget,
+  ExpensesList,
 };
