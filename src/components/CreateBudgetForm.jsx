@@ -34,7 +34,10 @@ const CreateBudgetForm = ({ onAddBudget }) => {
         <div className='relative mb-2'>
           <button
             className='border border-gray-200 p-2 rounded-md'
-            onClick={() => setOpenEmojiPicker(!openEmojiPicker)}
+            onClick={(e) => {
+              e.preventDefault();
+              setOpenEmojiPicker(!openEmojiPicker);
+            }}
           >
             {emojiIcon}
           </button>
@@ -72,7 +75,7 @@ const CreateBudgetForm = ({ onAddBudget }) => {
         </label>
         <button
           type='submit'
-          disabled={!(formData.budgetName, formData.amount)}
+          disabled={!(formData.budgetName && formData.amount)}
           className='mt-4 bg-blue-500 w-full text-white py-2 px-4 rounded-md disabled:bg-blue-300'
         >
           Create Budget
