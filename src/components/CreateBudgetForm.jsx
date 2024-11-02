@@ -1,13 +1,27 @@
 /* eslint-disable react/prop-types */
 import EmojiPicker from 'emoji-picker-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-const CreateBudgetForm = ({ onAddBudget }) => {
+const CreateBudgetForm = ({ onAddBudget, initialBudget }) => {
   const [emojiIcon, setEmojiIcon] = useState('😊');
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
 
-  const [formData, setFormData] = useState({ budgetName: '', amount: '' });
+  const [formData, setFormData] = useState({
+    budgetName: '',
+    amount: '',
+  });
+
+  useEffect(() => {
+    if (initialBudget) {
+      setEmojiIcon(initialBudget.emoji || '😊');
+      setFormData({
+        budgetName: initialBudget.category || '',
+        amount: initialBudget.totalAmount || '',
+      });
+      console.log(initialBudget);
+    }
+  }, [initialBudget]);
 
   // Update formData state on input change
   const handleInputChange = (e) => {
@@ -17,7 +31,7 @@ const CreateBudgetForm = ({ onAddBudget }) => {
   };
 
   const notify = () =>
-    toast.success('Budget Added', {
+    toast.success(initialBudget ? 'Budget Updated' : 'Budget Added', {
       pauseOnHover: false,
       autoClose: 2000,
     });
@@ -78,7 +92,7 @@ const CreateBudgetForm = ({ onAddBudget }) => {
           disabled={!(formData.budgetName && formData.amount)}
           className='mt-4 bg-blue-500 w-full text-white py-2 px-4 rounded-md disabled:bg-blue-300'
         >
-          Create Budget
+          {initialBudget ? 'Update Budget' : 'Create Budget'}
         </button>
       </form>
     </div>

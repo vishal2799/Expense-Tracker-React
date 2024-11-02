@@ -1,6 +1,7 @@
 import { Pencil, Trash } from 'lucide-react';
 import {
   BudgetCard,
+  CreateBudgetForm,
   CreateExpenseForm,
   DeleteBudget,
   DeleteExpense,
@@ -86,6 +87,40 @@ const Expenses = () => {
     setExpenses([...expenses, newExpense]);
   };
 
+  const openEditBudgetModal = (budget) => {
+    openModal(
+      <CreateBudgetForm onAddBudget={onEditBudget} initialBudget={budget} />,
+      'Edit Budget'
+    );
+  };
+
+  const onEditBudget = (updatedBudgetData, emoji) => {
+    const budgetToUpdate = budgetData.find(
+      (budget) => budget.id === Number(budgetId)
+    );
+
+    if (budgetToUpdate) {
+      console.log('found', budgetToUpdate);
+
+      // Update the budget object with the new data
+      const updatedBudget = {
+        ...budgetToUpdate,
+        category: updatedBudgetData.budgetName,
+        totalAmount: parseFloat(updatedBudgetData.amount),
+        emoji: emoji,
+        date: new Date().toISOString().split('T')[0], // Use existing date or today's date
+      };
+
+      // Update the single budget
+      setBudget(updatedBudget);
+
+      console.log('Updated budget:', updatedBudget);
+      closeModal(); // Close the modal after editing is complete
+    } else {
+      console.error('Budget not found');
+    }
+  };
+
   if (!budget) {
     return <p>Loading...</p>; // Display a loading state while data is being set
   }
@@ -95,7 +130,10 @@ const Expenses = () => {
       <div className='flex justify-between items-center'>
         <h2 className='text-3xl font-semibold text-black'>My Expenses</h2>
         <div className='flex gap-3'>
-          <button className='flex gap-2 py-2 px-5 bg-blue-500 text-white rounded-md'>
+          <button
+            onClick={() => openEditBudgetModal(budget)}
+            className='flex gap-2 py-2 px-5 bg-blue-500 text-white rounded-md'
+          >
             <Pencil width={16} />
             Edit
           </button>
