@@ -3,7 +3,15 @@ import { useEffect, useState } from 'react';
 import { budgetData, budgetData2, expensesData } from '../constants';
 import { BudgetCard, DeleteExpense, ExpensesList } from '../components';
 import { useModal } from '../context/ModalContext';
-import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 const Home = () => {
   const [budgets, setBudgets] = useState([]);
@@ -50,11 +58,11 @@ const Home = () => {
           Here&apos;s what happening with your money. Lets manage your expense.
         </p>
       </div>
-      <div className='grid grid-cols-3 gap-3'>
+      <div className='flex flex-col md:flex-row gap-3'>
         {[1, 2, 3].map((item, index) => (
           <div
             key={index}
-            className='flex justify-between items-center border border-slate-200 rounded-md shadow-sm py-3 px-4'
+            className='flex flex-1 justify-between items-center border border-slate-200 rounded-md shadow-sm py-3 px-4'
           >
             <div className='flex flex-col'>
               <h5 className='font-medium text-xs text-black'>Total Budget</h5>
@@ -66,22 +74,20 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <div className='flex justify-center gap-3'>
-        <div className='flex flex-col gap-3 w-3/5'>
-          <div>
-            <BarChart
-              width={500}
-              height={300}
-              data={budgetData2}
-              margin={{ top: 5, bottom: 5, left: 5, right: 5 }}
-            >
-              <XAxis dataKey='name' />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey='totalSpent' stackId='a' fill='#4845d2' />
-              <Bar dataKey='totalAmount' stackId='a' fill='#C3C2FF' />
-            </BarChart>
+      <div className='flex flex-col md:flex-row md:justify-center gap-3'>
+        <div className='flex flex-col gap-3 w-full md:w-3/5'>
+          <div className='border rounded-md p-5'>
+            <h2 className='font-bold text-lg text-black'>Activity</h2>
+            <ResponsiveContainer width='100%' height={300}>
+              <BarChart data={budgetData2} margin={{ top: 7 }}>
+                <XAxis dataKey='category' />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey='totalSpent' stackId='a' fill='#4845d2' />
+                <Bar dataKey='totalAmount' stackId='a' fill='#C3C2FF' />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
           <div className='flex flex-col gap-2'>
             <h4 className='text-black font-medium text-base'>
@@ -95,7 +101,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className='flex flex-col gap-2 w-2/5'>
+        <div className='flex flex-col gap-2 w-full md:w-2/5'>
           <h4 className='text-black font-medium text-base'>Latest Budgets</h4>
           <div className='flex flex-col gap-3'>
             {budgets.map((budget, index) => {
