@@ -142,19 +142,19 @@ const Expenses = () => {
 
   return (
     <div className='p-5 flex flex-col gap-6'>
-      <div className='flex justify-between items-center'>
+      <div className='flex flex-col gap-3 md:flex-row md:justify-between md:items-center'>
         <h2 className='text-3xl font-semibold text-black'>My Expenses</h2>
         <div className='flex gap-3'>
           <button
             onClick={() => openEditBudgetModal(budget)}
-            className='flex gap-2 py-2 px-5 bg-blue-500 text-white rounded-md'
+            className='flex flex-1 md:flex-auto justify-center gap-2 py-2 px-5 bg-blue-500 text-white rounded-md'
           >
             <Pencil width={16} />
             Edit
           </button>
           <button
             onClick={() => openDeleteBudgetModal(budget.id)}
-            className='flex gap-2 py-2 px-5 bg-red-500 text-white rounded-md'
+            className='flex flex-1 md:flex-auto justify-center gap-2 py-2 px-5 bg-red-500 text-white rounded-md'
           >
             <Trash width={16} />
             Delete
