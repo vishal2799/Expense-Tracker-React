@@ -1,17 +1,10 @@
 /* eslint-disable react/prop-types */
-import { toast } from 'react-toastify';
 import { useModal } from '../context/ModalContext';
 
-const DeleteExpense = ({ onDeleteExpense }) => {
-  const notify = () =>
-    toast.info('Expense Deleted', {
-      pauseOnHover: false,
-      autoClose: 2000,
-    });
+const Delete = ({ onDelete }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    onDeleteExpense();
-    notify();
+    onDelete();
   };
   const { closeModal } = useModal();
   return (
@@ -39,4 +32,4 @@ const DeleteExpense = ({ onDeleteExpense }) => {
   );
 };
 
-export default DeleteExpense;
+export default Delete;

@@ -4,8 +4,7 @@ import Modal from './Modal';
 import CreateBudget from './CreateBudget';
 import CreateBudgetForm from './CreateBudgetForm';
 import CreateExpenseForm from './CreateExpenseForm';
-import DeleteExpense from './DeleteExpense';
-import DeleteBudget from './DeleteBudget';
+import Delete from './Delete';
 import ExpensesList from './ExpensesList';
 export {
   Sidebar,
@@ -14,7 +13,6 @@ export {
   CreateBudget,
   CreateBudgetForm,
   CreateExpenseForm,
-  DeleteExpense,
-  DeleteBudget,
+  Delete,
   ExpensesList,
 };

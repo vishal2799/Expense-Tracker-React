@@ -1,7 +1,7 @@
 import { Receipt } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { budgetData, budgetData2, expensesData } from '../constants';
-import { BudgetCard, DeleteExpense, ExpensesList } from '../components';
+import { BudgetCard, Delete, ExpensesList } from '../components';
 import { useModal } from '../context/ModalContext';
 import {
   Bar,
@@ -21,7 +21,7 @@ const Home = () => {
 
   const openDeleteExpenseModal = (expenseId) => {
     openModal(
-      <DeleteExpense onDeleteExpense={() => deleteExpense(expenseId)} />,
+      <Delete onDelete={() => deleteExpense(expenseId)} />,
       'Delete Expense'
     );
   };
@@ -50,6 +50,12 @@ const Home = () => {
     return expensesData.filter((expense) => expense.budgetId === budgetId)
       .length;
   };
+
+  const budgetDataWithRemaining = budgetData2.map((item) => ({
+    ...item,
+    remainingAmount: item.totalAmount - item.totalSpent,
+  }));
+
   return (
     <div className='p-5 flex flex-col gap-6'>
       <div>
@@ -79,13 +85,15 @@ const Home = () => {
           <div className='border rounded-md p-5'>
             <h2 className='font-bold text-lg text-black'>Activity</h2>
             <ResponsiveContainer width='100%' height={300}>
-              <BarChart data={budgetData2} margin={{ top: 7 }}>
+              <BarChart data={budgetDataWithRemaining} margin={{ top: 7 }}>
                 <XAxis dataKey='category' />
                 <YAxis />
                 <Tooltip />
                 <Legend />
+                {/* Display 'totalSpent' in one color */}
                 <Bar dataKey='totalSpent' stackId='a' fill='#4845d2' />
-                <Bar dataKey='totalAmount' stackId='a' fill='#C3C2FF' />
+                {/* Display 'remainingAmount' in another color */}
+                <Bar dataKey='remainingAmount' stackId='a' fill='#C3C2FF' />
               </BarChart>
             </ResponsiveContainer>
           </div>

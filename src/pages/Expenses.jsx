@@ -3,14 +3,14 @@ import {
   BudgetCard,
   CreateBudgetForm,
   CreateExpenseForm,
-  DeleteBudget,
-  DeleteExpense,
+  Delete,
   ExpensesList,
 } from '../components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { budgetData, expensesData } from '../constants';
 import { useModal } from '../context/ModalContext';
+import { toast } from 'react-toastify';
 
 const Expenses = () => {
   const navigate = useNavigate();
@@ -22,14 +22,14 @@ const Expenses = () => {
 
   const openDeleteExpenseModal = (expenseId) => {
     openModal(
-      <DeleteExpense onDeleteExpense={() => deleteExpense(expenseId)} />,
+      <Delete onDelete={() => deleteExpense(expenseId)} />,
       'Delete Expense'
     );
   };
 
   const openDeleteBudgetModal = (budgetId) => {
     openModal(
-      <DeleteBudget onDeleteBudget={() => deleteBudget(budgetId)} />,
+      <Delete onDelete={() => deleteBudget(budgetId)} />,
       'Delete Budget'
     );
   };
@@ -59,17 +59,31 @@ const Expenses = () => {
   const remainingAmount = budget ? budget.totalAmount - totalSpent : 0;
   const itemCount = expenses.length;
 
+  const notify = () =>
+    toast.info('Expense Deleted', {
+      pauseOnHover: false,
+      autoClose: 2000,
+    });
+
+  const notify2 = () =>
+    toast.info('Budget Deleted', {
+      pauseOnHover: false,
+      autoClose: 2000,
+    });
+
   const deleteExpense = (expenseId) => {
     // Remove the expense with the specified id
     const updatedExpenses = expenses.filter(
       (expense) => expense.id !== expenseId
     );
+    notify();
     setExpenses(updatedExpenses);
     closeModal();
   };
 
   const deleteBudget = (budgetId) => {
     console.log(budgetId);
+    notify2();
     closeModal();
     setTimeout(() => {
       navigate('/budgets');

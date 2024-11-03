@@ -158,7 +158,7 @@ export const budgetData2 = [
   },
   {
     id: 4,
-    category: 'Dining Out',
+    category: 'Dining',
     emoji: '🍽️',
     itemCount: 3,
     totalAmount: 300,
